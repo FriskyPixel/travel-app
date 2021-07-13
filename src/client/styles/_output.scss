@@ -1,0 +1,65 @@
+.output {
+  display: flex;
+  flex-direction: column;
+
+  &_image {
+    height: 200px;
+    object-fit: cover;
+  }
+
+  &_info {
+    display: grid;
+    grid-template-areas:
+      "l l l l l"
+      "i i t t t"
+      "d d d d d";
+    background: white;
+    padding: 2em;
+    border-radius: 0 0 20px 20px;
+  }
+
+  &_location {
+    grid-area: l;
+    justify-self: center;
+    align-self: end;
+    text-transform: capitalize;
+  }
+  &_icon {
+    grid-area: i;
+    justify-self: end;
+    align-self: center;
+  }
+  &_temp {
+    grid-area: t;
+    align-self: center;
+    font-size: 3rem;
+  }
+  &_desc {
+    grid-area: d;
+    justify-self: center;
+    font-size: 1.5rem;
+  }
+}
+
+.output > * {
+  width: 100%;
+}
+
+@media (min-width: 650px) {
+  .output {
+    flex-direction: row;
+
+    &_image {
+      height: auto;
+      border-radius: 0 0 0 20px;
+    }
+
+    &_info {
+      border-radius: 0 0 20px 0;
+    }
+  }
+
+  .output > * {
+    width: 50%;
+  }
+}

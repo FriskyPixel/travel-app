@@ -1,0 +1,40 @@
+.header {
+  background-image: url(https://cdn.pixabay.com/photo/2017/09/16/16/09/sea-2755908_1280.jpg);
+  background-size: cover;
+  width: 100%;
+  padding: 2em;
+  margin-bottom: 2em;
+  position: relative;
+
+  &_container {
+    position: relative;
+    max-width: 800px;
+    margin: auto;
+  }
+}
+
+h1 {
+  color: white;
+  letter-spacing: 0.35em;
+  font-size: 3rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 0.25em;
+}
+
+h2 {
+  width: fit-content;
+  color: white;
+  background: $color1;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 0.5em 1em;
+  margin: 0 auto 0.75em;
+}
+
+p {
+  color: black;
+  width: 90%;
+  max-width: 800px;
+  margin: 0 auto 2em;
+}
