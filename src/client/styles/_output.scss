@@ -1,9 +1,10 @@
 .output {
   display: flex;
   flex-direction: column;
+  height: 300px;
 
   &_image {
-    height: 200px;
+    height: 100%;
     object-fit: cover;
   }
 

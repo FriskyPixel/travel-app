@@ -28,13 +28,17 @@ const geonamesUsername = process.env.GEONAMES_USERNAME;
 const weatherbitKey = process.env.WEATHERBIT_KEY;
 const pixabayKey = process.env.PIXABAY_KEY;
 
-// Get location data from user and use to retrieve weather and picture to send back
+// Get location and date data from user and use to retrieve weather info to send back
 app.post("/getData", async function (req, res) {
   const { location, date } = req.body;
-  const coordinates = await getCoordinates(location);
-  const { temp, icon, desc } = await getWeather(coordinates);
-  const picture = await getPicture(location);
-  res.send({ temp, icon, desc, picture });
+  try {
+    const coordinates = await getCoordinates(location);
+    const { temp, icon, desc } = await getWeather(coordinates, date);
+    const picture = await getPicture(location);
+    res.send({ temp, icon, desc, picture });
+  } catch {
+    res.send({ temp: "", icon: "", desc: "", picture: "" });
+  }
 });
 
 // Retrieves coordinates of a location
@@ -47,11 +51,17 @@ async function getCoordinates(location) {
 }
 
 // Retrieves weather for specific coordinates
-async function getWeather(coordinates) {
-  const location = await fetch(
-    `https://api.weatherbit.io/v2.0/current?lat=${coordinates.lat}&lon=${coordinates.lng}&units=I&key=${weatherbitKey}`
-  );
-  // const location = await fetch(`https://api.weatherbit.io/v2.0/forecast/daily?lat=${location.lat}&lon=${location.lng}&unites=I&key=${key}`);
+async function getWeather(coordinates, date) {
+  let location;
+  if (date == "present") {
+    location = await fetch(
+      `https://api.weatherbit.io/v2.0/current?lat=${coordinates.lat}&lon=${coordinates.lng}&units=I&key=${weatherbitKey}`
+    );
+  } else if (date == "future") {
+    location = await fetch(
+      `https://api.weatherbit.io/v2.0/forecast/daily?lat=${coordinates.lat}&lon=${coordinates.lng}&unites=I&key=${weatherbitKey}`
+    );
+  }
   const data = await location.json();
   const icon = `https://www.weatherbit.io/static/img/icons/${data.data[0].weather.icon}.png`;
   return {

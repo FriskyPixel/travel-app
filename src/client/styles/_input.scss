@@ -1,6 +1,7 @@
 .input {
+  position: relative;
   color: white;
-  background: $color2;
+  background: $color;
   border-radius: 20px 20px 0 0;
   padding: 3em 2em;
 
@@ -30,12 +31,27 @@
     border-radius: 5px;
     background-color: white;
     padding: 0.75em;
-    margin: 2em auto 0;
+    margin: 2em auto 1em;
 
     &:hover {
       color: white;
-      background: $color1;
+      background: darken($color, 5%);
+      box-shadow: 0 0 0 2px black;
       cursor: pointer;
+    }
+  }
+
+  &_error {
+    position: absolute;
+    bottom: 0.25em;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: fit-content;
+    color: white;
+    background: red;
+    padding: 0.25em 1em;
+    &.hide {
+      display: none;
     }
   }
 }

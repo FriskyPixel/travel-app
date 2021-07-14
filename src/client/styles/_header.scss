@@ -25,14 +25,14 @@ h1 {
 h2 {
   width: fit-content;
   color: white;
-  background: $color1;
+  background: $color;
   text-transform: uppercase;
   text-align: center;
   padding: 0.5em 1em;
   margin: 0 auto 0.75em;
 }
 
-p {
+.app_desc {
   color: black;
   width: 90%;
   max-width: 800px;

@@ -14,13 +14,13 @@
           <h2>Where will we be travelling?</h2>
         </div>
       </header>
-      <p>
+      <p class="app_desc">
         Please enter somewhere you'd like to travel, along with a date. If it's
         within 7 days, you will see the current weather. If it's further in the
         future, you will be given a future forecast.
       </p>
       <div class="card">
-        <div class="input">
+        <form class="input">
           <label class="input_label" for="user-location">Enter location:</label>
           <input
             class="input_input"
@@ -33,10 +33,11 @@
             class="input_input"
             type="date"
             id="user-date"
-            placeholder="Enter location"
+            placeholder="Enter date"
           />
           <button class="input_button">Submit</button>
-        </div>
+          <p class="input_error hide"></p>
+        </form>
         <div class="output">
           <img
             class="output_image"
