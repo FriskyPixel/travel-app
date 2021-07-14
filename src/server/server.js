@@ -22,20 +22,23 @@ const server = app.listen(port, function () {
   console.log(`Server running on local host: ${port}`);
 });
 
-// retreive API keys
+// Retreive API keys
 dotenv.config();
 const geonamesUsername = process.env.GEONAMES_USERNAME;
 const weatherbitKey = process.env.WEATHERBIT_KEY;
 const pixabayKey = process.env.PIXABAY_KEY;
+
+// Object to hold all data;
+const weatherInfo = { temp: "", icon: "", desc: "", picture: "" };
 
 // Get location and date data from user and use to retrieve weather info to send back
 app.post("/getData", async function (req, res) {
   const { location, date } = req.body;
   try {
     const coordinates = await getCoordinates(location);
-    const { temp, icon, desc } = await getWeather(coordinates, date);
-    const picture = await getPicture(location);
-    res.send({ temp, icon, desc, picture });
+    await getWeather(coordinates, date);
+    await getPicture(location);
+    res.send(weatherInfo);
   } catch {
     res.send({ temp: "", icon: "", desc: "", picture: "" });
   }
@@ -64,11 +67,9 @@ async function getWeather(coordinates, date) {
   }
   const data = await location.json();
   const icon = `https://www.weatherbit.io/static/img/icons/${data.data[0].weather.icon}.png`;
-  return {
-    temp: data.data[0].temp,
-    icon: icon,
-    desc: data.data[0].weather.description,
-  };
+  weatherInfo.temp = data.data[0].temp;
+  weatherInfo.icon = icon;
+  weatherInfo.desc = data.data[0].weather.description;
 }
 
 // Retrieves the URL of a picture of a location
@@ -77,5 +78,5 @@ async function getPicture(location) {
     `https://pixabay.com/api/?key=${pixabayKey}&q=${location}&orientation=horizontal`
   );
   const data = await loc.json();
-  return data.hits[0].webformatURL;
+  weatherInfo.picture = data.hits[0].webformatURL;
 }

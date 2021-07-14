@@ -10,6 +10,7 @@
 
   &_info {
     display: grid;
+    gap: 1em;
     grid-template-areas:
       "l l l l l"
       "i i t t t"
@@ -17,6 +18,17 @@
     background: white;
     padding: 2em;
     border-radius: 0 0 20px 20px;
+  }
+
+  &_intro {
+    grid-row: 2;
+    grid-column: 1 / -1;
+    color: $color;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    align-self: center;
+    justify-self: center;
   }
 
   &_location {
@@ -46,7 +58,7 @@
   width: 100%;
 }
 
-@media (min-width: 650px) {
+@media (min-width: 700px) {
   .output {
     flex-direction: row;
 

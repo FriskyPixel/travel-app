@@ -1,5 +1,5 @@
 {
-  "name": "weather-journal-app",
+  "name": "travel-weather-app",
   "version": "1.0.0",
   "description": "Express application",
   "author": "David Frisk",
@@ -33,6 +33,8 @@
     "node-sass": "^6.0.1",
     "sass-loader": "^12.1.0",
     "style-loader": "^3.0.0",
-    "webpack-dev-server": "^3.11.2"
+    "terser-webpack-plugin": "^5.1.3",
+    "webpack-dev-server": "^3.11.2",
+    "workbox-webpack-plugin": "^6.1.5"
   }
 }

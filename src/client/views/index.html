@@ -41,19 +41,30 @@
         <div class="output">
           <img
             class="output_image"
-            src="https://upload.wikimedia.org/wikipedia/commons/3/39/Downtown_Detroit%2C_Michigan_from_Windsor%2C_Ontario_%2821760963102%29.jpg"
+            src="https://images.pexels.com/photos/301599/pexels-photo-301599.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
           />
-          <div class="output_info">
-            <div class="output_location">Detroit</div>
+          <div class="output_info hide">
+            <p class="output_intro">Please choose a destination!</p>
+            <div class="output_location hide">Detroit</div>
             <img
-              class="output_icon"
+              class="output_icon hide"
               src="https://www.weatherbit.io/static/img/icons/t01d.png"
             />
-            <div class="output_temp">80F</div>
-            <div class="output_desc">description</div>
+            <div class="output_temp hide">80F</div>
+            <div class="output_desc hide">description</div>
           </div>
         </div>
       </div>
     </div>
+
+    <script>
+      // Check that service workers are supported
+      if ("serviceWorker" in navigator) {
+        // Use the window load event to keep the page load performant
+        window.addEventListener("load", () => {
+          navigator.serviceWorker.register("/service-worker.js");
+        });
+      }
+    </script>
   </body>
 </html>
