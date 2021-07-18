@@ -16,12 +16,6 @@ app.use(cors());
 // Initialize the main project folder
 app.use(express.static("dist"));
 
-// Setup Server
-const port = 8000;
-const server = app.listen(port, function () {
-  console.log(`Server running on local host: ${port}`);
-});
-
 // Retreive API keys
 dotenv.config();
 const geonamesUsername = process.env.GEONAMES_USERNAME;
@@ -32,7 +26,9 @@ const pixabayKey = process.env.PIXABAY_KEY;
 const weatherInfo = { temp: "", icon: "", desc: "", picture: "" };
 
 // Get location and date data from user and use to retrieve weather info to send back
-app.post("/getData", async function (req, res) {
+app.post("/getData", getData);
+
+async function getData(req, res) {
   const { location, date } = req.body;
   try {
     const coordinates = await getCoordinates(location);
@@ -42,7 +38,7 @@ app.post("/getData", async function (req, res) {
   } catch {
     res.send({ temp: "", icon: "", desc: "", picture: "" });
   }
-});
+}
 
 // Retrieves coordinates of a location
 async function getCoordinates(location) {
@@ -66,9 +62,9 @@ async function getWeather(coordinates, date) {
     );
   }
   const data = await location.json();
-  const icon = `https://www.weatherbit.io/static/img/icons/${data.data[0].weather.icon}.png`;
+
   weatherInfo.temp = data.data[0].temp;
-  weatherInfo.icon = icon;
+  weatherInfo.icon = `https://www.weatherbit.io/static/img/icons/${data.data[0].weather.icon}.png`;
   weatherInfo.desc = data.data[0].weather.description;
 }
 
@@ -80,3 +76,5 @@ async function getPicture(location) {
   const data = await loc.json();
   weatherInfo.picture = data.hits[0].webformatURL;
 }
+
+module.exports = app;
